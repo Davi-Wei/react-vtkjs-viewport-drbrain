@@ -35,10 +35,13 @@ export default function buildMetadata(imageIds) {
 
   // Compute the image size and spacing given the meta data we already have available.
   const metaDataMap = new Map();
+  let metaDataObj = cornerstone.metaData.get('imagePlaneModule', imageId0);
   imageIds.forEach(imageId => {
     // TODO: Retrieve this from somewhere other than Cornerstone
-    const metaData = cornerstone.metaData.get('imagePlaneModule', imageId);
-
+    let metaData = cornerstone.metaData.get('imagePlaneModule', imageId);
+    if (!metaData) {
+      metaData = metaDataObj;
+    }
     metaDataMap.set(imageId, metaData);
   });
 
